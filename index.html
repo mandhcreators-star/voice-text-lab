@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#10233d" />
+  <title>VOICE TEXT LAB</title>
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+<body>
+  <header class="app-header">
+    <div class="brand">
+      <div class="brand-mark">V</div>
+      <div>
+        <p class="eyebrow">NARRATION & WRITING ASSISTANT</p>
+        <h1>VOICE TEXT LAB</h1>
+        <p class="subtitle">文章の意味を保ちながら、伝わるナレーションへ整えます。</p>
+      </div>
+    </div>
+  </header>
+
+  <main class="app-shell">
+    <section class="panel input-panel">
+      <div class="section-heading">
+        <div>
+          <span class="step">01</span>
+          <h2>元の文章</h2>
+        </div>
+        <button id="sampleButton" class="text-button" type="button">サンプルを入力</button>
+      </div>
+
+      <label class="sr-only" for="sourceText">元の文章</label>
+      <textarea
+        id="sourceText"
+        maxlength="12000"
+        placeholder="ここに整理したい文章を貼り付けてください。&#10;&#10;元の意味や事実関係を変えずに、指定した時間へ整えます。"
+      ></textarea>
+
+      <div class="input-footer">
+        <span id="inputCount">0文字</span>
+        <button id="clearButton" class="text-button danger" type="button">クリア</button>
+      </div>
+    </section>
+
+    <section class="panel settings-panel">
+      <div class="section-heading">
+        <div>
+          <span class="step">02</span>
+          <h2>読み上げ時間</h2>
+        </div>
+        <p class="hint">標準版・アサーティブ版を同時に作成</p>
+      </div>
+
+      <div class="duration-grid" role="radiogroup" aria-label="読み上げ時間">
+        <button class="duration-button" data-seconds="30" role="radio" aria-checked="false" type="button">
+          <strong>30秒</strong><span>約150文字</span>
+        </button>
+        <button class="duration-button selected" data-seconds="60" role="radio" aria-checked="true" type="button">
+          <strong>1分</strong><span>約300文字</span>
+        </button>
+        <button class="duration-button" data-seconds="120" role="radio" aria-checked="false" type="button">
+          <strong>2分</strong><span>約600文字</span>
+        </button>
+        <button class="duration-button" data-seconds="180" role="radio" aria-checked="false" type="button">
+          <strong>3分</strong><span>約900文字</span>
+        </button>
+        <button class="duration-button" data-seconds="300" role="radio" aria-checked="false" type="button">
+          <strong>5分</strong><span>約1,500文字</span>
+        </button>
+      </div>
+
+      <button id="generateButton" class="primary-button" type="button">
+        <span class="button-label">ナレーションを生成</span>
+        <span class="spinner" aria-hidden="true"></span>
+      </button>
+
+      <p id="statusMessage" class="status-message" role="status" aria-live="polite"></p>
+    </section>
+
+    <section id="resultsSection" class="results-section hidden" aria-labelledby="resultsTitle">
+      <div class="results-heading">
+        <div>
+          <span class="step">03</span>
+          <h2 id="resultsTitle">生成結果</h2>
+        </div>
+        <span id="selectedDurationBadge" class="duration-badge">1分</span>
+      </div>
+
+      <div class="results-grid">
+        <article class="result-card">
+          <div class="result-card-header">
+            <div>
+              <p class="result-kicker">STANDARD</p>
+              <h3>標準版</h3>
+              <p>客観的で自然な、聞きやすい表現</p>
+            </div>
+            <button class="copy-button" data-copy-target="standardOutput" type="button">コピー</button>
+          </div>
+          <textarea id="standardOutput" class="output-text" aria-label="標準版の生成結果"></textarea>
+          <div class="result-meta">
+            <span id="standardCount">0文字</span>
+            <span id="standardTime">推定 0秒</span>
+          </div>
+        </article>
+
+        <article class="result-card assertive-card">
+          <div class="result-card-header">
+            <div>
+              <p class="result-kicker">ASSERTIVE</p>
+              <h3>アサーティブ版</h3>
+              <p>相手を尊重しながら、課題と行動を明確にする表現</p>
+            </div>
+            <button class="copy-button" data-copy-target="assertiveOutput" type="button">コピー</button>
+          </div>
+          <textarea id="assertiveOutput" class="output-text" aria-label="アサーティブ版の生成結果"></textarea>
+          <div class="result-meta">
+            <span id="assertiveCount">0文字</span>
+            <span id="assertiveTime">推定 0秒</span>
+          </div>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <footer class="app-footer">
+    <p>VOICE TEXT LAB <span>— Meaning First, Words That Reach.</span></p>
+  </footer>
+
+  <script src="./config.js"></script>
+  <script src="./app.js"></script>
+</body>
+</html>
